@@ -3,6 +3,7 @@ import { Producto } from '../producto/producto.model';
 import { FormsModule } from '@angular/forms';
 import { Formulario } from "../formulario/formulario";
 import { ProductoComponent } from "../producto/producto";
+import { ProductoService } from '../producto.service';
 
 @Component({
   selector: 'app-listado-productos',
@@ -12,15 +13,13 @@ import { ProductoComponent } from "../producto/producto";
 })
 export class ListadoProductos {
 
-  productos: Producto[] = [
-    new Producto('Pantalon', 130.0),
-    new Producto('Camisa', 80.0),
-    new Producto('Jersey', 45.0)
-  ];
+  productos: Producto[] = [];
 
-  agregarProducto(producto: Producto) {
-    this.productos.push(producto);
-  }
-
-
+  constructor(private productoServices: ProductoService){}
+   ngOnInit(){
+      //Inicializar los productos
+      this.productos = this.productoServices.productos;
+    }
 }
+
+
